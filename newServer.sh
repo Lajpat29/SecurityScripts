@@ -25,7 +25,7 @@ sed -i "/^ChallengeResponseAuthentication[[:space:]][yes|no].*/d" /etc/ssh/sshd_
 #Disable password based ssh
 sed -i "/^PasswordAuthentication[[:space:]][yes|no].*/d" /etc/ssh/sshd_config && echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
 
-#Lock Root account it is good practice to use sudo account instaed of root login
+#Locked Root account it is good practice to use sudo account instead of root login
 passwd -dl root
 
 #Restart the ssh dameon
