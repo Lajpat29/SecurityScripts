@@ -17,14 +17,20 @@ chown sshlogin:sshlogin /home/sshlogin/.ssh/authorized_keys
 chmod 700 /home/sshlogin/.ssh
 chmod 400 /home/sshlogin/.ssh/authorized_keys
 
+#Adding sshlogin to sudoers
+echo "sshlogin	ALL=(ALL)	NOPASSWD:ALL" >> /etc/sudoers
 #Disable ChallengeResponseAuthentication as it may ask for password and no recommended.
 sed -i "/^ChallengeResponseAuthentication[[:space:]][yes|no].*/d" /etc/ssh/sshd_config && echo "ChallengeResponseAuthentication no" >> /etc/ssh/sshd_config
 
 #Disable password based ssh
 sed -i "/^PasswordAuthentication[[:space:]][yes|no].*/d" /etc/ssh/sshd_config && echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
 
+#Lock Root account it is good practice to use sudo account instaed of root login
+passwd -dl root
+
 #Restart the ssh dameon
 service ssh restart
+
 
 #Reboot the system
 reboot
