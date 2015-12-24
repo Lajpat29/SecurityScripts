@@ -18,8 +18,10 @@ chmod 700 /home/sshlogin/.ssh
 chmod 400 /home/sshlogin/.ssh/authorized_keys
 
 #Adding sshlogin to sudoers
+cp /etc/sudoers /root/sudoers.bak
 echo "sshlogin	ALL=(ALL)	NOPASSWD:ALL" >> /etc/sudoers
 #Disable ChallengeResponseAuthentication as it may ask for password and no recommended.
+cp /etc/ssh/sshd_config /root/sshd_config.bak
 sed -i "/^ChallengeResponseAuthentication[[:space:]][yes|no].*/d" /etc/ssh/sshd_config && echo "ChallengeResponseAuthentication no" >> /etc/ssh/sshd_config
 
 #Disable password based ssh
