@@ -35,7 +35,7 @@ sed -i "/^DenyUsers.*/d" /etc/ssh/sshd_config && echo "DenyUsers root admin nobo
 
 sed -i "/^DenyGroups.*/d" /etc/ssh/sshd_config && echo "DenyGroups root admin sudo nobody" >> /etc/ssh/sshd_config
 
-sed -i "/^PermitRootLogin[[:space:]][Yes|yes|no|without-password].*/d" /etc/ssh/sshd_config
+sed -i "/^PermitRootLogin[[:space:]][Yes|yes|no|without\-password].*/d" /etc/ssh/sshd_config
 
 echo "PermitRootLogin no" >> /etc/ssh/sshd_config
 #Locked Root account it is good practice to use sudo account instead of root login
