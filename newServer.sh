@@ -63,9 +63,9 @@ sed -i "/^DenyGroups.*/d" /etc/ssh/sshd_config
 sed -i "/^PermitRootLogin[[:space:]][Yes|yes|no|without\-password].*/d" /etc/ssh/sshd_config
 
 
-(echo -e "sshlogin\tALL=(ALL)\tNOPASSWD:ALL") >> /etc/sudoers
-(echo -en "ChallengeResponseAuthentication no\nPasswordAuthentication no\nAllowUsers sshlogin") >> /etc/ssh/sshd_config
-(echo -en "DenyUsers root admin nobody\nDenyGroups root admin sudo nobody\nPermitRootLogin no") >> /etc/ssh/sshd_config
+(printf "sshlogin\tALL=(ALL)\tNOPASSWD:ALL") >> /etc/sudoers
+(printf "ChallengeResponseAuthentication no\nPasswordAuthentication no\nAllowUsers sshlogin") >> /etc/ssh/sshd_config
+(printf "DenyUsers root admin nobody\nDenyGroups root admin sudo nobody\nPermitRootLogin no") >> /etc/ssh/sshd_config
 
 #Reboot the system
 reboot
