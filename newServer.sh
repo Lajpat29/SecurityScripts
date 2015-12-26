@@ -62,10 +62,14 @@ sed -i "/^DenyUsers.*/d" /etc/ssh/sshd_config
 sed -i "/^DenyGroups.*/d" /etc/ssh/sshd_config
 sed -i "/^PermitRootLogin[[:space:]][Yes|yes|no|without\-password].*/d" /etc/ssh/sshd_config
 
+echo -en "\n##Below Lines are inserted by script####\n"
+
+echo -e "sshlogin	ALL=(ALL)	NOPASSWD:ALL" >> /etc/sudoers
+echo -e "\n###End Of File####"
 echo -en "##Below Lines are inserted by script####"
-echo -en "sshlogin	ALL=(ALL)	NOPASSWD:ALL\nChallengeResponseAuthentication no\nPasswordAuthentication no\nAllowUsers sshlogin" >> /etc/sudoers
+echo -en "ChallengeResponseAuthentication no\nPasswordAuthentication no\nAllowUsers sshlogin" >> /etc/sudoers
 echo -en "DenyUsers root admin nobody\nDenyGroups root admin sudo nobody\nPermitRootLogin no" >> /etc/ssh/sshd_config
 
-echo -en "###End Of File####"
+echo -e "\n###End Of File####"
 #Reboot the system
 reboot
