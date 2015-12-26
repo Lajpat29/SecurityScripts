@@ -8,34 +8,34 @@ echo_command=echo
 useradd -m -c "ssh Login" sshlogin  -s /bin/bash
 
 if ! type "$echo_command" > /dev/null; then
-  echo -ne "Echo  command  doesn't exist hence terminating." >> /root/scriptLog.error
+  (echo -ne "Echo  command  doesn't exist hence terminating.") >> /root/scriptLog.error
   exit
   else
-  echo -ne "Echo command exist hence moving forward." >> /root/scriptLog.out
+  (echo -ne "Echo command exist hence moving forward.") >> /root/scriptLog.out
 fi
 
 #Creating .ssh folder in sshlogin home.
 if [ -d "$sshlogin_home_dir" ]; then
-    echo -ne "making dir /home/sshlogin/.ssh as home folder already exist for sshlogin" >> /root/scriptLog.out
+    (echo -ne "making dir /home/sshlogin/.ssh as home folder already exist for sshlogin") >> /root/scriptLog.out
     mkdir /home/sshlogin/.ssh
-    echo -ne "Done making .ssh folder for sshlogin status $?"  >> /root/scriptLog.out
+    (echo -ne "Done making .ssh folder for sshlogin status $?")  >> /root/scriptLog.out
     else
-    echo -ne "making home folder for sshlogin user as it doesnot exist."   >> /root/scriptLog.out
+    (echo -ne "making home folder for sshlogin user as it doesnot exist.")   >> /root/scriptLog.out
     mkdir -p /home/sshlogin/.ssh
-    echo -ne "Done making home folder status $?"   >> /root/scriptLog.out
+    (echo -ne "Done making home folder status $?")   >> /root/scriptLog.out
     chown -R  sshlogin:sshlogin /home/sshlogin
-    echo -ne "Changing permission of home folder of sshlogin status $?"   >> /root/scriptLog.out
+    (echo -ne "Changing permission of home folder of sshlogin status $?")   >> /root/scriptLog.out
 fi
 
 
 passwd -d sshlogin 
-echo -ne "Deleting password for sshlogin Status $?"   >> /root/scriptLog.out
+(echo -ne "Deleting password for sshlogin Status $?")   >> /root/scriptLog.out
 passwd -d root
-echo -ne "Deleting root password Status $?"   >> /root/scriptLog.out
+(echo -ne "Deleting root password Status $?")   >> /root/scriptLog.out
 passwd -l sshlogin
-echo -ne "Locking sshlogin Status $?"   >> /root/scriptLog.out
+(echo -ne "Locking sshlogin Status $?")   >> /root/scriptLog.out
 passwd -l root
-echo -ne "Locking root Status $?"   >> /root/scriptLog.out
+(echo -ne "Locking root Status $?")   >> /root/scriptLog.out
 
 
 #Copying the ssh-key
@@ -63,9 +63,9 @@ sed -i "/^DenyGroups.*/d" /etc/ssh/sshd_config
 sed -i "/^PermitRootLogin[[:space:]][Yes|yes|no|without\-password].*/d" /etc/ssh/sshd_config
 
 
-echo -e "sshlogin\tALL=(ALL)\tNOPASSWD:ALL" >> /etc/sudoers
-echo -en "ChallengeResponseAuthentication no\nPasswordAuthentication no\nAllowUsers sshlogin" >> /etc/ssh/sshd_config
-echo -en "DenyUsers root admin nobody\nDenyGroups root admin sudo nobody\nPermitRootLogin no" >> /etc/ssh/sshd_config
+(echo -e "sshlogin\tALL=(ALL)\tNOPASSWD:ALL") >> /etc/sudoers
+(echo -en "ChallengeResponseAuthentication no\nPasswordAuthentication no\nAllowUsers sshlogin") >> /etc/ssh/sshd_config
+(echo -en "DenyUsers root admin nobody\nDenyGroups root admin sudo nobody\nPermitRootLogin no") >> /etc/ssh/sshd_config
 
 #Reboot the system
 reboot
