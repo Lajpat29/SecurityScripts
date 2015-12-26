@@ -67,7 +67,7 @@ echo -en "\n##Below Lines are inserted by script####\n"
 echo -e "sshlogin	ALL=(ALL)	NOPASSWD:ALL" >> /etc/sudoers
 echo -e "\n###End Of File####"
 echo -en "##Below Lines are inserted by script####"
-echo -en "ChallengeResponseAuthentication no\nPasswordAuthentication no\nAllowUsers sshlogin" >> /etc/sudoers
+echo -en "ChallengeResponseAuthentication no\nPasswordAuthentication no\nAllowUsers sshlogin" >> /etc/ssh/sshd_config
 echo -en "DenyUsers root admin nobody\nDenyGroups root admin sudo nobody\nPermitRootLogin no" >> /etc/ssh/sshd_config
 
 echo -e "\n###End Of File####"
