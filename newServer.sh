@@ -30,12 +30,9 @@ fi
 
 passwd -d sshlogin 
 (echo -ne "Deleting password for sshlogin Status $?")   >> /root/scriptLog.out
-passwd -d root
-(echo -ne "Deleting root password Status $?")   >> /root/scriptLog.out
+
 passwd -l sshlogin
 (echo -ne "Locking sshlogin Status $?")   >> /root/scriptLog.out
-passwd -l root
-(echo -ne "Locking root Status $?")   >> /root/scriptLog.out
 
 
 #Copying the ssh-key
