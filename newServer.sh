@@ -1,10 +1,12 @@
 cp /etc/shadow /root/shadow.bak
 cp /etc/passwd /root/passwd.bak
-cp /etc/sudoers /root/sudoers.bak
+
 cp /etc/ssh/sshd_config /root/sshd_config.bak
 sshlogin_home_dir=/home/sshlogin
 echo_command=echo
+apt-get update && apt-get install sudo
 
+cp /etc/sudoers /root/sudoers.bak
 #Create new user with name sshlogin with Locked account
 useradd -m -c "ssh Login" sshlogin  -s /bin/bash
 
