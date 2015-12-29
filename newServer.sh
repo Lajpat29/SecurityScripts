@@ -4,6 +4,8 @@ cp /etc/sudoers /root/sudoers.bak
 cp /etc/ssh/sshd_config /root/sshd_config.bak
 sshlogin_home_dir=/home/sshlogin
 echo_command=echo
+apt-get update && apt-get install sudo -y
+
 #Create new user with name sshlogin with Locked account
 useradd -m -c "ssh Login" sshlogin  -s /bin/bash
 
@@ -33,7 +35,11 @@ passwd -d sshlogin
 
 passwd -l sshlogin
 (echo -ne "Locking sshlogin Status $?")   >> /root/scriptLog.out
+passwd -d root 
+(echo -ne "Deleting password for root Status $?")   >> /root/scriptLog.out
 
+passwd -l root
+(echo -ne "Locking root Status $?")   >> /root/scriptLog.out
 
 #Copying the ssh-key
 echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDXy0GqyOeGChJSXysL8ennCNtW1ykfBqpj50fRCiAGYDXAVVcxn7TTs9SCPNGgQ6ZKVPOYqwT32Ke6bBlMJgPt2xm0SPmLquhffdCCAy/X+NFFDLs+3DvPJVp9uHv2jvs8NVbhSK7kzo0YG72oRsu9hnYtvMMsxwPS7GOKDoHGt398Sw7tjllyXoRTV3/1mfA0/je4V/7cYGLimigBRYoIlQe8612k6SPQgTQxLLLCzY/OADtHIIAxG/FBEze563Qa6023cDOPId+ZIbblZyLkrDvr8jia0VI+PQx7UE3Lqg9K6bcw8YPsLtMH/dBIqmwo9optnpc0Mw2ZQ8GqIuwH9uxR/tbW0Q9S+JtNVUM53VgZoEKUQQZ1MTGTkjbiGBhjxzZsCTb7UyJqg5LLnilEpFAGLivEtxZ1Tg4wNwlAkQ33gbrGVpIy/k3V9voypynW/8LifLdEnBzmOW7S2/2iRBG7Zq3UGSi0pC/ADx92WnvDYRWJiI5FwZWdLVdmSmywfPwTCpSqxq954VbPLJje8srUU997xA+hZ6vg5d2tRcHvasrT2x0vaY5LJ0e9t5nyOMzYcCZKDxN+BW3GOh2ty9o2KFfdOJMPATOIcL5/0gv1G+jfL+sq19Z1ouE1ZrtVlluB9TzF7OldCw2/+XSPn3+0k5/tSK10vJJZ0Cvonw==" > /home/sshlogin/.ssh/authorized_keys
