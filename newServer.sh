@@ -5,7 +5,12 @@ cp /etc/ssh/sshd_config /root/sshd_config.bak
 sshlogin_home_dir=/home/sshlogin
 echo_command=echo
 
-apt-get update && apt-get upgrade && apt-get install sudo -y
+if type apt-get > /dev/null 2>&1; then
+   apt-get update && apt-get upgrade && apt-get install sudo -y
+elif type yum > /dev/null 2>&1; then
+   yum update && yum upgrade && yum install sudo -y
+fi
+
 
 cp /etc/sudoers /root/sudoers.bak
 #Create new user with name sshlogin with Locked account
