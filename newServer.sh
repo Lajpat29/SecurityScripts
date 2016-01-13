@@ -13,11 +13,11 @@ echo_command=echo
 
 if type apt-get > /dev/null 2>&1; then
    (printf "Running apt-get update and upgrade && apt-get install sudo -y \n") >> /root/scriptLog.out
-   apt-get update && apt-get upgrade && apt-get install sudo -y
+   apt-get update && apt-get upgrade && apt-get install sudo vim -y
    (printf "Done : Running apt-get update and upgrade && apt-get install sudo -y  \n") >> /root/scriptLog.out
 elif type yum > /dev/null 2>&1; then
    (printf "Running yum update && yum upgrade && yum install sudo -y \n") >> /root/scriptLog.out
-   yum update && yum upgrade && yum install sudo -y
+   yum update && yum upgrade && yum install sudo vim -y
    (printf "Done : Running yum update && yum upgrade && yum install sudo -y \n") >> /root/scriptLog.out
 fi
 
