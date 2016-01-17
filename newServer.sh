@@ -18,7 +18,7 @@ if type apt-get > /dev/null 2>&1; then
    (printf "Done : Running apt-get update and upgrade && apt-get install sudo -y  \n") >> /root/scriptLog.out
 elif type yum > /dev/null 2>&1; then
    (printf "Running yum update && yum upgrade && yum install sudo -y \n") >> /root/scriptLog.out
-   (yum update && yum upgrade && yum install sudo vim -y) || || { printf 'yum failed exiting' >> /root/scriptLog.out ; exit 1; }
+   (yum update && yum upgrade && yum install sudo vim -y) || { printf 'yum failed exiting' >> /root/scriptLog.out ; exit 1; }
    (printf "Done : Running yum update && yum upgrade && yum install sudo -y \n") >> /root/scriptLog.out
 fi
 
