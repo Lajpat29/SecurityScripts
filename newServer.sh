@@ -9,7 +9,6 @@ cp /etc/passwd /root/passwd.bak
 cp /etc/ssh/sshd_config /root/sshd_config.bak
 (printf "Done : Creating backup of file /etc/ssh/sshd_config to /root/sshd_config.bak \n") >> /root/scriptLog.out
 sshlogin_home_dir=/home/sshlogin
-echo_command=echo
 
 if type apt-get > /dev/null 2>&1; then
    (printf "Running apt-get update and upgrade && apt-get install sudo -y \n") >> /root/scriptLog.out
@@ -26,11 +25,11 @@ cp /etc/sudoers /root/sudoers.bak
 #Create new user with name sshlogin with Locked account
 useradd -m -c "ssh Login" sshlogin  -s /bin/bash
 
-if ! type "$echo_command" > /dev/null; then
+if type echo > /dev/null 2>&1; then
+   (printf "Echo command exist hence moving forward. \n") >> /root/scriptLog.out
+  else
   (printf "Echo  command  doesn't exist hence terminating. \n") >> /root/scriptLog.error
   exit
-  else
-  (printf "Echo command exist hence moving forward. \n") >> /root/scriptLog.out
 fi
 
 #Creating .ssh folder in sshlogin home.
