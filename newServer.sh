@@ -10,7 +10,6 @@ cp /etc/ssh/sshd_config /root/sshd_config.bak
 (printf "Done : Creating backup of file /etc/ssh/sshd_config to /root/sshd_config.bak \n") >> /root/scriptLog.out
 sshlogin_home_dir=/home/sshlogin
 echo_command=echo
-private_ip=$(ip route get 10.0.80.11 | awk 'NR==1 {print $NF}')
 
 if type apt-get > /dev/null 2>&1; then
    (printf "Running apt-get update and upgrade && apt-get install sudo -y \n") >> /root/scriptLog.out
@@ -88,9 +87,6 @@ sed -i "/^PermitRootLogin[[:space:]][Yes|yes|no|without\-password].*/d" /etc/ssh
 (printf "sshlogin\tALL=(ALL)\tNOPASSWD:ALL\n") >> /etc/sudoers
 (printf "ChallengeResponseAuthentication no\nPasswordAuthentication no\nAllowUsers sshlogin\n") >> /etc/ssh/sshd_config
 (printf "DenyUsers root admin nobody\nDenyGroups root admin sudo nobody\nPermitRootLogin no\n") >> /etc/ssh/sshd_config
-if [ ! -z "$private_ip" -a "$private_ip" != " " ]; then
-    (printf "ListenAddress $private_ip\n") >> /etc/ssh/sshd_config
-fi
 
 #Reboot the system
 reboot
