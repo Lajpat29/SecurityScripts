@@ -12,7 +12,7 @@ sshlogin_home_dir=/home/sshlogin
 
 if type apt-get > /dev/null 2>&1; then
    (printf "Running apt-get update and upgrade && apt-get install sudo -y \n") >> /root/scriptLog.out
-   (apt-get update && apt-get upgrade -y && apt-get install sudo vim -y) || { printf 'apt-get failed exiting' >> /root/scriptLog.out ; exit 1; }
+   (apt-get update -y && apt-get upgrade -y && apt-get install sudo vim -y) || { printf 'apt-get failed exiting' >> /root/scriptLog.out ; exit 1; }
    (printf "Done : Running apt-get update and upgrade && apt-get install sudo -y  \n") >> /root/scriptLog.out
 elif type yum > /dev/null 2>&1; then
    (printf "Running yum update && yum upgrade && yum install sudo -y \n") >> /root/scriptLog.out
