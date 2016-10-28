@@ -87,5 +87,5 @@ sed -i "/^PermitRootLogin[[:space:]][Yes|yes|no|without\-password].*/d" /etc/ssh
 (printf "\nChallengeResponseAuthentication no\nPasswordAuthentication no\nAllowUsers sshlogin\n") >> /etc/ssh/sshd_config
 (printf "\nDenyUsers root admin nobody\nDenyGroups root admin sudo nobody\nPermitRootLogin no\n") >> /etc/ssh/sshd_config
 
-#Reboot the system
-reboot
+#Restarting sshd daemon
+service ssh status
